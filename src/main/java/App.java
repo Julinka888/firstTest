@@ -17,7 +17,8 @@ public class App
         System.setProperty("webdriver.chrome.driver", "C:\\Files\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();//создать объект драйвера для Сhrome, чтобы запустить браузер мн
         try {
-           driver.get("https://www.airportparkingreservations.com/");
+           
+            driver.get("https://www.airportparkingreservations.com/");
            driver.findElement(By.id("blended_searchbox")).findElement(By.name("airport")).sendKeys("LAX");
            //Thread.sleep(5000);
            Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
@@ -32,7 +33,7 @@ public class App
            List<String> names = driver.findElement(By.id("blended_searchbox")).findElements(By.className("name")).stream().map(WebElement::getText).collect(Collectors.toList()); //найти выпадающий список и преобразовать его в массив
            System.out.println(names);//должен вывести необходимую строку
            driver.quit();
-           if (!names.contains("Los Angeles (LAX)?")) {
+           if (!names.contains("Los Angeles (LAX)")) {
                throw new NoSuchElementException("Don't work");
            }
        } catch (NoSuchElementException e) {
